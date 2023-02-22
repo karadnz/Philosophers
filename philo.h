@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:44 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/22 16:08:34 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:13:29 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_philo
 	int			lf_id;
 	int			rf_id;
 	long long	last_ate;
-	struct s_rules		*prules;
+	struct s_rules		*rules;
 	pthread_t	thread_id;
 
 
