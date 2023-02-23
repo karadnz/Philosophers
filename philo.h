@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:44 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/23 17:08:54 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:30:59 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 
 typedef struct s_philo
 {
-	int			id;
-	int			eat_count;
-	int			lf_id;
-	int			rf_id;
-	long long	last_ate;
+	int					id;
+	int					eat_count;
+	int					lf_id;
+	int					rf_id;
+	long long			last_ate;
 	struct s_rules		*rules;
-	pthread_t	thread_id;
+	pthread_t			thread_id;
 
 
 }				t_philo;
@@ -40,6 +40,7 @@ typedef struct s_rules
 	int					time_eat;
 	int					time_sleep;
 	int					max_eat;
+	
 	int					is_dead;
 	int					all_ate;
 	long long			first_timestamp;

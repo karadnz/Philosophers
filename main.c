@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:34 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/23 17:10:57 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:26:59 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,38 +91,6 @@ void *p_think(void *philo)
 	return NULL;
 }
 
-
-void init_rules(int argc, char **argv, t_rules *rules)
-{
-	rules->philo_count = ft_atoi(argv[1]);
-	rules->time_death = ft_atoi(argv[2]);
-	rules->time_eat = ft_atoi(argv[3]);
-	rules->time_sleep = ft_atoi(argv[4]);
-	if (argc == 6)
-		rules->max_eat = ft_atoi(argv[5]);
-	// rules->is_dead = 0;
-	// rules->all_Ate = 0;
-
-	rules->philos = (t_philo **)malloc(sizeof(t_philo *) * rules->philo_count);
-	init_philos(rules);
-	rules->first_timestamp = timestamp();
-}
-void init_philos(t_rules *rules)
-{
-	int i;
-
-	i = 0;
-	while (i < rules->philo_count)
-	{
-		rules->philos[i] = (t_philo *)malloc(sizeof(t_philo));
-		rules->philos[i]->id = i;
-		rules->philos[i]->lf_id = i;
-		rules->philos[i]->rf_id = (i + 1) % rules->philo_count;
-		rules->philos[i]->last_ate = 0;
-		rules->philos[i]->rules = rules;
-		i++;
-	}
-}
 
 
 int main2(int argc, char **argv)
