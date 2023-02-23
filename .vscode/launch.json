@@ -1,0 +1,17 @@
+{
+	"configurations": [
+	{
+		"name": "(lldb) Başlat",
+		"type": "cppdbg",
+		"request": "launch",
+		"program": "${workspaceFolder}/philo",
+		"args": [],
+		"stopAtEntry": false,
+		"cwd": "${fileDirname}",
+		"environment": [],
+		"externalConsole": false,
+		"MIMode": "lldb",
+		"preLaunchTask": "message"
+	},
+	]
+}

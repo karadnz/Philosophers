@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:59:20 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/22 13:59:50 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:59:49 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,27 @@ long long	timestamp(void)
 long long	time_diff(long long past, long long pres)
 {
 	return (pres - past);
+}
+
+int	ft_atoi(const char *str)
+{
+	long int	n;
+	int			sign;
+
+	n = 0;
+	sign = 1;
+	while ((*str <= 13 && *str >= 9) || *str == 32)
+		str++;
+	if (*str == '-')
+		return (-1);
+	else if (*str == '+')
+		str++;
+	while (*str)
+	{
+		if (*str >= '0' && *str <= '9')
+			n = n * 10 + (*str++ - '0');
+		else
+			return (-1);
+	}
+	return ((int)(n * sign));
 }

@@ -7,7 +7,7 @@ NAME	= philo
 
 GCC	= gcc
 
-FLAGS = -fsanitize=address
+FLAGS =  -g
 
 INCLUDE	= -lpthread
 
