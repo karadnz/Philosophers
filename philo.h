@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:44 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/23 18:30:59 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:49:52 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,22 @@ typedef struct s_rules
 	t_philo				**philos;
 }						t_rules;
 
+//****INIT*******//
+void		init_rules(int argc, char **argv, t_rules *rules);
+void		init_philos(t_rules *rules);
+int			init_mutex(t_rules *rules);
+//****MAIN******//
 
-
-//tmp
-
-void *p_eat(void *philo);
-void init_rules(int argc, char **argv, t_rules *rules);
-void init_philos(t_rules *rules);
+//****UTILS****//
+int			ft_atoi(const char *str);
 long long	timestamp(void);
 long long	time_diff(long long past, long long pres);
-void *p_sleep(void *philo);
-void *p_think(void *philo);
-int	ft_atoi(const char *str);
+//****ERROR***//
+
+//****EST****//
+void 		*p_eat(void *rls);
+void 		*p_sleep(void *philo);
+void 		*p_think(void *philo);
 
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:26:35 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/23 18:31:48 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:49:33 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void init_rules(int argc, char **argv, t_rules *rules)
 
 	rules->philos = (t_philo **)malloc(sizeof(t_philo *) * rules->philo_count);
 	init_philos(rules);
-	rules->first_timestamp = timestamp();
+	init_mutex(rules);
+	
 }
 
 void init_philos(t_rules *rules)
