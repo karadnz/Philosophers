@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:43:01 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/24 15:56:22 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/24 19:42:18 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_est(void *phil)
 			break ;
 		if (philo->rules->max_eat != -1 && philo->rules->all_ate)
 			break ;
-		if (philo->rules->max_eat != -1 && philo->eat_count > philo->rules->max_eat)
+		if (philo->rules->max_eat != -1 && philo->eat_count >= philo->rules->max_eat)
 			break ;
 		p_print(philo->rules, philo->id, "is sleeping");
 		u_sleep(philo->rules->time_sleep, philo->rules);
@@ -50,7 +50,7 @@ void p_eat(t_philo *philo)
 	philo->last_ate = timestamp();
 	pthread_mutex_unlock(&(rules->meal_check));
 	u_sleep(rules->time_eat, rules);
-	philo->eat_count++;
+	(philo->eat_count)++;
 	pthread_mutex_unlock(&(rules->forks[philo->lf_id]));
 	pthread_mutex_unlock(&(rules->forks[philo->rf_id]));
 }
@@ -64,13 +64,16 @@ void	check_is_dead(t_rules *rules, t_philo **philos)
 
 	while(!(rules->all_ate))
 	{
+		
 		i = 0;
 		while (i < rules->philo_count && !(rules->is_dead))
 		{
+			
 			pthread_mutex_lock(&(rules->meal_check));
-			if (time_diff(philos[i]->last_ate, timestamp()) > rules->time_death)
+			//printf("diff %lld  td: %d \n", time_diff(philos[i]->last_ate, timestamp()), rules->time_death);
+			if (time_diff(philos[i]->last_ate, timestamp() ) > rules->time_death)
 			{
-				printf("HIT\n");
+				printf("HIT\n \n\n");
 				p_print(rules, i, "died");
 				rules->is_dead = 1;
 				j = 0;
@@ -87,7 +90,6 @@ void	check_is_dead(t_rules *rules, t_philo **philos)
 		if (rules->is_dead)
 			break;
 		eat_check(rules, philos);
-
 	}
 }
 

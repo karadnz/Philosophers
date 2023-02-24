@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:44 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/24 15:51:11 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:41:27 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void		init_rules(int argc, char **argv, t_rules *rules);
 void		init_philos(t_rules *rules);
 int			init_mutex(t_rules *rules);
 //****MAIN******//
+void	p_exit(t_rules *rules, t_philo **philos);
 
 //****UTILS****//
 int			ft_atoi(const char *str);
