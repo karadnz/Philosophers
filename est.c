@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:43:01 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/23 18:50:12 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:03:13 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_est(void *rls)
 	t_rules	*rules;
 
 	rules = (t_rules *)rls;
-	rules->first_timestamp = timestamp();
+	
 
 	return NULL;
 }

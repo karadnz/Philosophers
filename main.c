@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:34 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/23 18:48:33 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:04:26 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int main2(int argc, char **argv)
 	
 	t_rules *rules = (t_rules *)malloc(sizeof(t_rules));
 	init_rules(argc, argv, rules);
+	
 
 	for (int i = 0; i < rules->max_eat; i++) // yeme sayisi
 	{
