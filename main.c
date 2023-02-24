@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:34 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/24 13:04:26 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:11:34 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int main(int argc, char **argv)
 
 	for (int i = 0; i < rules->philo_count; i++) // yeme sayisi
 	{
-		pthread_create(&(rules->philos[i]->thread_id), NULL, p_eat, rules->philos[i]);
+		pthread_create(&(rules->philos[i]->thread_id), NULL, ft_est, rules->philos[i]);
+		rules->philos[i]->last_ate = timestamp();
 	}
 
 	for (int j = 0; j < rules->philo_count; j++)
