@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:43:01 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/24 13:31:33 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:36:16 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ void *p_eat(void *phil)
 	t_rules	*rules;
 	t_philo *philo;
 
+	
+	philo = (t_philo *)phil;
 	rules = philo->rules;
-	philo = (t_philo *)philo;
 	if (philo->eat_count >= philo->rules->max_eat)
 		return NULL;
 	long long in = timestamp();

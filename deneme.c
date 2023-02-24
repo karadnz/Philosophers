@@ -1,3 +1,5 @@
+#include "philo.h"
+
 void	philo_eats(t_philosopher *philo)
 {
 	t_rules	*rules;
@@ -43,4 +45,65 @@ void	*p_thread(void *void_philosopher)
 		i++;
 	}
 	return (NULL);
+}
+
+void	exit_launcher(t_rules *rules, t_philosopher *philos)
+{
+	int	i;
+
+	i = -1;
+	while (++i < rules->nb_philo)
+		pthread_join(philos[i].thread_id, NULL);
+	i = -1;
+	while (++i < rules->nb_philo)
+		pthread_mutex_destroy(&(rules->forks[i]));
+	pthread_mutex_destroy(&(rules->writing));
+}
+
+void	death_checker(t_rules *r, t_philosopher *p)
+{
+	int	i;
+	int	j;
+
+	while (!(r->all_ate))
+	{
+		i = -1;
+		while (++i < r->nb_philo && !(r->dieded))
+		{
+			pthread_mutex_lock(&(r->meal_check));
+			if (time_diff(p[i].t_last_meal, timestamp()) > r->time_death)
+			{
+				action_print(r, i, "died");
+				r->dieded = 1;
+				j = -1;
+				while (++j < r->nb_philo)
+					pthread_mutex_unlock(&(r->forks[j]));
+			}
+			pthread_mutex_unlock(&(r->meal_check));
+			usleep(100);
+		}
+		if (r->dieded)
+			break ;
+		eat_control(r, p);
+	}
+}
+
+int	launcher(t_rules *rules)
+{
+	int				i;
+	t_philosopher	*phi;
+
+	i = 0;
+	phi = rules->philosophers;
+	rules->first_timestamp = timestamp();
+	while (i < rules->nb_philo)
+	{
+		if (pthread_create(&(phi[i].thread_id), NULL, p_thread, &(phi[i])))
+			return (1);
+		phi[i].t_last_meal = timestamp();
+		i++;
+	}
+	death_checker(rules, rules->philosophers);
+	exit_launcher(rules, phi);
+	return (0);
 }
