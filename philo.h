@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:44 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/24 13:32:11 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:51:11 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,13 @@ long long	timestamp(void);
 long long	time_diff(long long past, long long pres);
 void		u_sleep(long long time, t_rules *rules);
 void		p_print(t_rules *rules, int id, char *msg);
+void eat_check(t_rules *rules, t_philo **philos);
+void	check_is_dead(t_rules *rules, t_philo **philos);
 //****ERROR***//
 
 //****EST****//
 void		*ft_est(void *rls);
-void 		*p_eat(void *rls);
+void 		p_eat(t_philo *rls);
 void 		*p_sleep(void *philo);
 void 		*p_think(void *philo);
 

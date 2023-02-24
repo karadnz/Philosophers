@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:34 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/23 16:13:08 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:51:42 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,3 +111,57 @@ void init_philos(t_rules *rules)
 }
 
 
+
+void *p_eat2(t_philo *philo)
+{
+	t_philo *phil = (t_philo *)philo;
+	if (phil->eat_count >= phil->rules->max_eat)
+		return NULL;
+	long long in = timestamp();
+
+	long long diff = time_diff(phil->rules->first_timestamp, in);
+	printf("%lld : %d is eating \n", diff, phil->id);
+
+	while (timestamp() - in < phil->rules->time_eat)
+	{
+		usleep(10);
+	}
+	phil->eat_count++;
+	return NULL;
+}
+
+
+int main2(int argc, char **argv)
+{
+
+	if (argc != 5 && argc != 6)
+	{
+		printf("Argument count not valid!");
+		return (0);
+	}
+	
+	t_rules *rules = (t_rules *)malloc(sizeof(t_rules));
+	init_rules(argc, argv, rules);
+	
+
+	for (int i = 0; i < rules->max_eat; i++) // yeme sayisi
+	{
+		for (int j = 0; j < rules->philo_count; j++)
+		{
+			if ((i + j) % 2 == 0)
+			{
+				pthread_create(&(rules->philos[j]->thread_id), NULL, p_eat, rules->philos[j]);
+			}
+			else
+				pthread_create(&(rules->philos[j]->thread_id), NULL, p_sleep, rules->philos[j]);
+		}
+
+		for (int j = 0; j < rules->philo_count; j++)
+		{
+			pthread_join(rules->philos[j]->thread_id, NULL);
+		}
+
+		printf("\n");
+	}
+	return (0);
+}

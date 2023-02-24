@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:26:35 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/24 13:04:39 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:47:49 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void init_rules(int argc, char **argv, t_rules *rules)
 	rules->time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		rules->max_eat = ft_atoi(argv[5]);
+	else
+		rules->max_eat = -1;
 	rules->is_dead = 0;
 	rules->all_ate = 0;
 

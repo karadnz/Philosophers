@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:43:01 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/24 13:36:16 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:56:22 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	*ft_est(void *phil)
 	t_philo	*philo;
 
 	philo = (t_philo *)phil;
-
+	if (philo->id % 2)
+		usleep(15000);
 	while(!(philo->rules->is_dead))
 	{
 		p_eat(philo);
@@ -35,75 +36,72 @@ void	*ft_est(void *phil)
 	return NULL;
 }
 
-void *p_eat(void *phil)
+void p_eat(t_philo *philo)
 {
 	t_rules	*rules;
-	t_philo *philo;
 
-	
-	philo = (t_philo *)phil;
 	rules = philo->rules;
-	if (philo->eat_count >= philo->rules->max_eat)
-		return NULL;
-	long long in = timestamp();
-
-	long long diff = time_diff(philo->rules->first_timestamp, in);
-	printf("%lld : %d is eating \n", diff, philo->id);
-
-	while (timestamp() - in < philo->rules->time_eat)
-	{
-		usleep(10);
-	}
+	pthread_mutex_lock(&(rules->forks[philo->lf_id]));
+	p_print(philo->rules, philo->id, "has taken a fork");
+	pthread_mutex_lock(&(rules->forks[philo->rf_id]));
+	p_print(philo->rules, philo->id, "has taken a fork");
+	pthread_mutex_lock(&(rules->meal_check));
+	p_print(rules, philo->id, "is eating");
+	philo->last_ate = timestamp();
+	pthread_mutex_unlock(&(rules->meal_check));
+	u_sleep(rules->time_eat, rules);
 	philo->eat_count++;
-	return NULL;
+	pthread_mutex_unlock(&(rules->forks[philo->lf_id]));
+	pthread_mutex_unlock(&(rules->forks[philo->rf_id]));
 }
 
-void *p_eat2(void *philo)
+
+
+void	check_is_dead(t_rules *rules, t_philo **philos)
 {
-	t_philo *phil = (t_philo *)philo;
-	if (phil->eat_count >= phil->rules->max_eat)
-		return NULL;
-	long long in = timestamp();
+	int	i;
+	int	j;
 
-	long long diff = time_diff(phil->rules->first_timestamp, in);
-	printf("%lld : %d is eating \n", diff, phil->id);
-
-	while (timestamp() - in < phil->rules->time_eat)
+	while(!(rules->all_ate))
 	{
-		usleep(10);
+		i = 0;
+		while (i < rules->philo_count && !(rules->is_dead))
+		{
+			pthread_mutex_lock(&(rules->meal_check));
+			if (time_diff(philos[i]->last_ate, timestamp()) > rules->time_death)
+			{
+				printf("HIT\n");
+				p_print(rules, i, "died");
+				rules->is_dead = 1;
+				j = 0;
+				while (j < rules->philo_count)
+				{
+					pthread_mutex_unlock(&(rules->forks[j]));
+					j++;
+				}
+			}
+			pthread_mutex_unlock(&(rules->meal_check));
+			usleep(100);
+			i++;
+		}
+		if (rules->is_dead)
+			break;
+		eat_check(rules, philos);
+
 	}
-	phil->eat_count++;
-	return NULL;
 }
 
-void *p_sleep(void *philo)
+void eat_check(t_rules *rules, t_philo **philos)
 {
-	t_philo *phil = (t_philo *)philo;
-	long long in = timestamp();
+	int	i;
 
-	long long diff = time_diff(phil->rules->first_timestamp, in);
-	printf("%lld : %d is sleeping\n", diff, phil->id);
+	i = 0;
+	while (rules->max_eat != -1 && i < rules->philo_count && philos[i]->eat_count >= rules->max_eat)
+		i++;
+	if (i == rules->philo_count)
+		rules->all_ate = 1;
 	
-	while (timestamp() - in < phil->rules->time_sleep)
-	{
-		usleep(10);
-	}
-	// usleep(100 * 10000);
-	return NULL;
 }
 
-void *p_think(void *philo)
-{
-	t_philo *phil = (t_philo *)philo;
-	long long in = timestamp();
 
-	long long diff = time_diff(phil->rules->first_timestamp, in);
-	printf("%lld : %d is thinking \n\n", diff, phil->id);
-	
-	while (timestamp() - in < phil->rules->time_eat)
-	{
-		usleep(10);
-	}
-	// usleep(100 * 10000);
-	return NULL;
-}
+
