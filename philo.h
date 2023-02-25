@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:44 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/24 18:41:27 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/25 12:44:55 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_rules
 void		init_rules(int argc, char **argv, t_rules *rules);
 void		init_philos(t_rules *rules);
 int			init_mutex(t_rules *rules);
+int			is_valid_num(char *str);
+int			is_args_valid(int argc, char **argv);
 //****MAIN******//
 void	p_exit(t_rules *rules, t_philo **philos);
 

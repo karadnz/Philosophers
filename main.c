@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:34 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/24 19:52:14 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/25 12:53:49 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,25 @@ void init_philo(t_philo *philo, int i);
 int main(int argc, char **argv)
 {
 
-	if (argc != 5 && argc != 6)
+	if (!(is_args_valid(argc, argv)))
 	{
-		printf("Argument count not valid!");
+		write(2, "Error at arguments!", 19);
 		return (0);
 	}
 	
 	t_rules *rules = (t_rules *)malloc(sizeof(t_rules));
 	init_rules(argc, argv, rules);
 	rules->first_timestamp = timestamp();
-	for (int i = 0; i < rules->philo_count; i++)
+	/*for (int i = 0; i < rules->philo_count; i++)
 	{
-		printf("i: %d id: %d, lf: %d, rf: %d, la: %lld",i,rules->philos[i]->id,rules->philos[i]->lf_id,rules->philos[i]->rf_id,rules->philos[i]->last_ate);
-	}
+		printf("i: %d id: %d, lf: %d, rf: %d, la: %lld\n",i,rules->philos[i]->id,rules->philos[i]->lf_id,rules->philos[i]->rf_id,rules->philos[i]->last_ate);
+	}*/
 	
-	pause()
+	//pause();
 	for (int i = 0; i < rules->philo_count; i++) // yeme sayisi
 	{
-		pthread_create(&(rules->philos[i]->thread_id), NULL, ft_est, rules->philos[i]);
+		if(pthread_create(&(rules->philos[i]->thread_id), NULL, ft_est, rules->philos[i]))
+			exit(1);
 		rules->philos[i]->last_ate = timestamp();
 	}
 	check_is_dead(rules, rules->philos);

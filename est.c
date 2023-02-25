@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:43:01 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/24 19:42:18 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/25 13:18:33 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,13 @@ void p_eat(t_philo *philo)
 	pthread_mutex_lock(&(rules->meal_check));
 	p_print(rules, philo->id, "is eating");
 	philo->last_ate = timestamp();
+	
 	pthread_mutex_unlock(&(rules->meal_check));
+	//(philo->eat_count)++;
 	u_sleep(rules->time_eat, rules);
 	(philo->eat_count)++;
+	
+	
 	pthread_mutex_unlock(&(rules->forks[philo->lf_id]));
 	pthread_mutex_unlock(&(rules->forks[philo->rf_id]));
 }
@@ -73,7 +77,7 @@ void	check_is_dead(t_rules *rules, t_philo **philos)
 			//printf("diff %lld  td: %d \n", time_diff(philos[i]->last_ate, timestamp()), rules->time_death);
 			if (time_diff(philos[i]->last_ate, timestamp() ) > rules->time_death)
 			{
-				printf("HIT\n \n\n");
+				//printf("HIT\n \n\n");
 				p_print(rules, i, "died");
 				rules->is_dead = 1;
 				j = 0;
@@ -98,8 +102,12 @@ void eat_check(t_rules *rules, t_philo **philos)
 	int	i;
 
 	i = 0;
+	
 	while (rules->max_eat != -1 && i < rules->philo_count && philos[i]->eat_count >= rules->max_eat)
+	{
 		i++;
+		// printf("max: %d, philo: %d, curr: %d \n \n", rules->max_eat, i, philos[i]->eat_count);
+	}
 	if (i == rules->philo_count)
 		rules->all_ate = 1;
 	
