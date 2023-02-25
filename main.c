@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:34 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/25 14:57:01 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/25 15:30:37 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(int argc, char **argv)
 	}
 	check_is_dead(rules, rules->philos);
 	p_exit(rules, rules->philos);
-	system("leaks philo");
 	return (0);
 }
 

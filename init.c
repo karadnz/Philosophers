@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:26:35 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/25 14:52:29 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/25 15:44:44 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	is_args_valid(int argc, char **argv)
 			return (0);
 		i++;
 	}
+	if (argc == 6 && ft_atoi(argv[5]) == 0)
+		return (0);
 	return (1);
 }
 
