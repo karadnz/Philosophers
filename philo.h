@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:44 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/25 12:44:55 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/25 14:48:41 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ typedef struct s_philo
 	long long			last_ate;
 	struct s_rules		*rules;
 	pthread_t			thread_id;
-
-
 }				t_philo;
 
 typedef struct s_rules
@@ -40,7 +38,7 @@ typedef struct s_rules
 	int					time_eat;
 	int					time_sleep;
 	int					max_eat;
-	
+
 	int					is_dead;
 	int					all_ate;
 	long long			first_timestamp;
@@ -57,23 +55,19 @@ int			init_mutex(t_rules *rules);
 int			is_valid_num(char *str);
 int			is_args_valid(int argc, char **argv);
 //****MAIN******//
-void	p_exit(t_rules *rules, t_philo **philos);
-
+void		p_exit(t_rules *rules, t_philo **philos);
 //****UTILS****//
 int			ft_atoi(const char *str);
 long long	timestamp(void);
 long long	time_diff(long long past, long long pres);
 void		u_sleep(long long time, t_rules *rules);
 void		p_print(t_rules *rules, int id, char *msg);
-void eat_check(t_rules *rules, t_philo **philos);
-void	check_is_dead(t_rules *rules, t_philo **philos);
+void		eat_check(t_rules *rules, t_philo **philos);
+void		check_is_dead(t_rules *rules, t_philo **philos);
 //****ERROR***//
-
 //****EST****//
 void		*ft_est(void *rls);
-void 		p_eat(t_philo *rls);
-void 		*p_sleep(void *philo);
-void 		*p_think(void *philo);
-
-
-# endif
+void		p_eat(t_philo *rls);
+void		*p_sleep(void *philo);
+void		*p_think(void *philo);
+#endif

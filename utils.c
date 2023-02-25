@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:59:20 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/24 13:28:49 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/25 14:24:41 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	p_print(t_rules *rules, int id, char *msg)
 	}
 	pthread_mutex_unlock(&(rules->writing));
 	return ;
-
 }
 
 int	ft_atoi(const char *str)

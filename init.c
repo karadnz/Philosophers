@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:26:35 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/25 13:13:22 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/25 14:52:29 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ int	is_args_valid(int argc, char **argv)
 
 int	is_valid_num(char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
-			return(0);
+			return (0);
 		i++;
 	}
 	return (1);
 }
-void init_rules(int argc, char **argv, t_rules *rules)
+
+void	init_rules(int argc, char **argv, t_rules *rules)
 {
 	rules->philo_count = ft_atoi(argv[1]);
 	rules->time_death = ft_atoi(argv[2]);
@@ -53,19 +54,15 @@ void init_rules(int argc, char **argv, t_rules *rules)
 		rules->max_eat = -1;
 	rules->is_dead = 0;
 	rules->all_ate = 0;
-
 	rules->philos = (t_philo **)malloc(sizeof(t_philo *) * rules->philo_count);
 	init_philos(rules);
 	init_mutex(rules);
-
 	return ;
-	
-	
 }
 
-void init_philos(t_rules *rules)
+void	init_philos(t_rules *rules)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < rules->philo_count)
