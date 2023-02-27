@@ -7,7 +7,7 @@ NAME	= philo
 
 GCC	= gcc
 
-FLAGS =  -Wall -Wextra -Werror  -g
+FLAGS =  -Wall -Wextra -Werror
 
 INCLUDE	= -lpthread
 
@@ -18,7 +18,7 @@ HEADER	= philo.h
 
 all:	$(NAME)
 
-.PHONY:	clean fclean re bonus bench bclean
+.PHONY:	clean fclean re bonus bclean
 
 $(NAME): $(OBJS)
 	$(GCC) $(INCLUDE) $(FLAGS) -o $(NAME) $(OBJS)

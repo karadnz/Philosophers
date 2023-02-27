@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:44 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/25 14:48:41 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:12:11 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
-# include <string.h> //*
 
 typedef struct s_philo
 {
