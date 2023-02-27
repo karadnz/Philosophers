@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:12:34 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/27 15:24:11 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:44:33 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	p_exit(t_rules *rules, t_philo **philos)
 	while (++i < rules->philo_count)
 		pthread_mutex_destroy(&(rules->forks[i]));
 	pthread_mutex_destroy(&(rules->writing));
+	pthread_mutex_destroy(&(rules->meal_check));
 	free(rules->philos);
 	free(rules);
 }
