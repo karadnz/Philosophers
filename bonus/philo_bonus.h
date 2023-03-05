@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:50:52 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/05 14:43:25 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/05 19:36:03 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <signal.h>
 
 typedef struct s_philo
 {
@@ -44,8 +45,10 @@ typedef struct s_rules
 	long long			first_timestamp;
 	sem_t				*meal_check;
 	sem_t				*forks;
+	sem_t				*stop;
 	sem_t				*writing;
 	t_philo				**philos;
+
 }						t_rules;
 
 //****INIT*******//

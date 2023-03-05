@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:52:10 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/05 14:34:11 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/05 19:46:49 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	u_sleep(long long time, t_rules *rules)
 void	p_print(t_rules *rules, int id, char *msg)
 {
 	sem_wait((rules->writing));
-	if (!(rules->is_dead))
+	if (1) //!(rules->is_dead)
 	{
 		printf("%lli ", timestamp() - rules->first_timestamp);
 		printf("%i ", id + 1);

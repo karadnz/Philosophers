@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:50 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/05 14:37:59 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/05 19:37:59 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	init_mutex(t_rules *rules)
 	sem_unlink("meal_check");
 	sem_unlink("writing");
 	sem_unlink("forks");
+	sem_unlink("stop");
+	rules->stop = sem_open("stop", O_CREAT, 0600, 1);
 	rules->meal_check = sem_open("meal_check", O_CREAT, 0600, 1);
 	rules->writing = sem_open("writing", O_CREAT, 0600, 1);
 	rules->forks = sem_open("forks", O_CREAT, 0600,
