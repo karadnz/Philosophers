@@ -6,20 +6,16 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:16 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/05 19:47:08 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:50:55 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-
 int	main(int argc, char **argv)
 {
 	int		i;
 	t_rules	*rules;
-	
-
-	sem_open("stop", O_CREAT, 0600, 1);
 
 	if (!(is_args_valid(argc, argv)))
 	{
@@ -31,23 +27,19 @@ int	main(int argc, char **argv)
 	init_rules(argc, argv, rules);
 	rules->first_timestamp = timestamp();
 	sem_wait(rules->stop);
-	//printf("AAAAAA\n\n\n");
 	while (i < rules->philo_count)
 	{
 		rules->philos[i]->last_ate = timestamp();
 		rules->philos[i]->pid = fork();
 		if (rules->philos[i]->pid == 0)
 		{
-			//printf("AAAAAA\n\n\n");
 			ft_est(rules->philos[i]);
 			exit(0);
 		}
 		i++;
 		usleep(100);
 	}
-	//check_is_dead(rules, rules->philos);
 	//p_exit(rules, rules->philos);
-	//printf("AAAAAA\n\n\n");
 	sem_wait(rules->stop);
 	i = -1;
 	while (++i < rules->philo_count)

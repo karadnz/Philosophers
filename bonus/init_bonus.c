@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:50 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/05 19:37:59 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:53:05 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,9 @@ void	init_rules(int argc, char **argv, t_rules *rules)
 	rules->time_eat = ft_atoi(argv[3]);
 	rules->time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		rules->max_eat = ft_atoi(argv[5]);
+		rules->max_eat = ((ft_atoi(argv[5])) * rules->philo_count);
 	else
 		rules->max_eat = -1;
-	rules->is_dead = 0;
 	rules->all_ate = 0;
 	rules->philos = (t_philo **)malloc(sizeof(t_philo *) * rules->philo_count);
 	init_philos(rules);
@@ -80,6 +79,49 @@ void	init_philos(t_rules *rules)
 	}
 }
 
+int	get_len(int i)
+{
+	int	rt;
+
+	rt = 0;
+	while (i > 0)
+	{
+		i = i / 10;
+		rt++;
+	}
+	return (rt);
+}
+
+char *get_name(int i)
+{
+	char	*rt;
+	int		j;
+
+	j = 0;
+	rt = malloc((sizeof(char) * 3) + get_len(i) + 1);
+	rt[0] = 'i';
+	rt[1] = '_';
+	rt[2] = 'a';
+	while (j < get_len(i))
+	{
+		rt[3 + j] = 'a' + (i % 10);
+		i /= 10;
+		j++;
+	}
+	rt[3 + j] = '\0';
+	return (rt);
+}
+
+/*rules->is_ate = (sem_t **)malloc(sizeof(sem_t *) * rules->philo_count);
+
+	for (size_t i = 0; i < rules->philo_count; i++)
+	{
+		char *str = get_name(i + 1);
+		sem_unlink(str);
+		//printf("%s HIT \n\n",str);
+		rules->is_ate[i] = rules->stop = sem_open(str, O_CREAT, 0600, 1);
+		free(str);
+	}*/	
 int	init_mutex(t_rules *rules)
 {
 	sem_unlink("meal_check");
