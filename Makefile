@@ -39,7 +39,7 @@ clean:
 	rm -f $(OBJS) $(BOBJS)
 
 fclean: clean
-	rm -f $(NAME) $(BONUS)
+	rm -f $(NAME) $(BNAME)
 
 re: fclean all
 

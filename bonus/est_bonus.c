@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:39 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/06 15:56:07 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:40:16 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*ft_bonus_death(void *phil)
 		}
 		sem_post(philo->rules->meal_check);
 		usleep(100);
-		sem_wait(philo->rules->meal_check);
+		/*sem_wait(philo->rules->meal_check);
 		if (philo->rules->max_eat != -1
 			&& philo->eat_count >= philo->rules->max_eat)
 		{
@@ -39,7 +39,7 @@ void	*ft_bonus_death(void *phil)
 			break ;
 		}
 		sem_post(philo->rules->meal_check);
-		usleep(100);
+		usleep(100);*/
 	}
 	return (NULL);
 }
@@ -55,9 +55,14 @@ void	*ft_est(void *phil)
 	while (1)
 	{
 		p_eat(philo);
-		/*if (philo->rules->max_eat != -1
+		if (philo->rules->max_eat != -1
 			&& philo->eat_count >= philo->rules->max_eat)
-			break ;*/
+			{
+				sem_post(philo->rules->is_ate[philo->id]);
+				break ;
+				
+			}
+			
 		p_print(philo->rules, philo->id, "is sleeping");
 		u_sleep(philo->rules->time_sleep, philo->rules);
 		p_print(philo->rules, philo->id, "is thinking");

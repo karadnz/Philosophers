@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:50:52 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/06 15:08:58 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:11:03 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int			is_valid_num(char *str);
 int			is_args_valid(int argc, char **argv);
 //****MAIN******//
 void		p_exit(t_rules *rules, t_philo **philos);
+void		*ft_eat_checker(void *arg);
 //****UTILS****//
 int			ft_atoi(const char *str);
 long long	timestamp(void);
