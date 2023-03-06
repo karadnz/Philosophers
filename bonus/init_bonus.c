@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:50 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/06 16:45:14 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/06 20:15:10 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	init_rules(int argc, char **argv, t_rules *rules)
 	rules->time_eat = ft_atoi(argv[3]);
 	rules->time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		rules->max_eat = ((ft_atoi(argv[5])) * 1);//rules->philo_count
+		rules->max_eat = ((ft_atoi(argv[5])) * 1);
 	else
 		rules->max_eat = -1;
 	rules->all_ate = 0;
@@ -92,17 +92,19 @@ int	get_len(int i)
 	return (rt);
 }
 
-char *get_name(int i)
+char	*get_name(int i)
 {
 	char	*rt;
 	int		j;
+	int		len;
 
+	len = get_len(i);
 	j = 0;
-	rt = malloc((sizeof(char) * 3) + get_len(i) + 1);
+	rt = malloc((sizeof(char) * 3) + len + 1);
 	rt[0] = 'i';
 	rt[1] = '_';
 	rt[2] = 'a';
-	while (j < get_len(i))
+	while (j < len)
 	{
 		rt[3 + j] = 'a' + (i % 10);
 		i /= 10;
@@ -115,19 +117,21 @@ char *get_name(int i)
 	
 int	init_mutex(t_rules *rules)
 {
+	int	i;
+
 	sem_unlink("meal_check");
 	sem_unlink("writing");
 	sem_unlink("forks");
 	sem_unlink("stop");
 	rules->is_ate = (sem_t **)malloc(sizeof(sem_t *) * rules->philo_count);
-
-	for (int i = 0; i < rules->philo_count; i++)
+	i = 0;
+	while (i < rules->philo_count)
 	{
 		char *str = get_name(i + 1);
 		sem_unlink(str);
-		//printf("%s HIT \n\n",str);
 		rules->is_ate[i] = rules->stop = sem_open(str, O_CREAT, 0600, 1);
 		free(str);
+		i++;
 	}
 	rules->stop = sem_open("stop", O_CREAT, 0600, 1);
 	rules->meal_check = sem_open("meal_check", O_CREAT, 0600, 1);

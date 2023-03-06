@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:16 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/06 19:08:24 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:59:58 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,7 @@ int	main(int argc, char **argv)
 			exit(0);
 		}
 		i++;
-		usleep(100);
-	}
-	
-	i = 0;
-	while (i < rules->philo_count)
-	{
-		sem_wait(rules->is_ate[i]);
-		i++;
+		usleep(10);
 	}
 	pthread_create(&checker, NULL, ft_eat_checker, rules);
 	pthread_detach(checker);
@@ -60,7 +53,7 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-void		*ft_eat_checker(void *arg)
+void	*ft_eat_checker(void *arg)
 {
 	int		i;
 	t_rules	*rules;
@@ -72,18 +65,20 @@ void		*ft_eat_checker(void *arg)
 		sem_wait(rules->is_ate[i]);
 		i++;
 	}
+	usleep(100);
+	i = 0;
+	while (i < rules->philo_count)
+	{
+		sem_wait(rules->is_ate[i]);
+		i++;
+	}
 	sem_post(rules->stop);
 }
+
 void	p_exit(t_rules *rules, t_philo **philos)
 {
 	int	i;
 
-	i = -1;
-	/*while (++i < rules->philo_count)
-	{
-		waitpid(rules->philos[i]->pid, NULL, 0);
-	}*/
-	i = -1;
 	sem_close(rules->meal_check);
 	sem_close(rules->writing);
 	sem_close(rules->forks);
