@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:16 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/06 19:59:58 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/08 02:46:49 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,12 @@ int	main(int argc, char **argv)
 	t_rules		*rules;
 	pthread_t	checker;
 
-	if (!(is_args_valid(argc, argv)))
-	{
-		write(2, "Error at arguments!", 19);
-		return (0);
-	}
-	i = 0;
+	i = -1;
 	rules = (t_rules *)malloc(sizeof(t_rules));
 	init_rules(argc, argv, rules);
 	rules->first_timestamp = timestamp();
 	sem_wait(rules->stop);
-	while (i < rules->philo_count)
+	while (++i < rules->philo_count)
 	{
 		rules->philos[i]->last_ate = timestamp();
 		rules->philos[i]->pid = fork();
@@ -37,21 +32,21 @@ int	main(int argc, char **argv)
 			ft_est(rules->philos[i]);
 			exit(0);
 		}
-		i++;
 		usleep(10);
 	}
 	pthread_create(&checker, NULL, ft_eat_checker, rules);
 	pthread_detach(checker);
 	sem_wait(rules->stop);
-	i = -1;
-	while (++i < rules->philo_count)
-	{
-		kill(rules->philos[i]->pid, SIGKILL); //sem_pos(child_kill)
-	}
 	p_exit(rules, rules->philos);
-	//system("leaks philo_bonus");
 	return (0);
 }
+/*
+if (rules->philos[i]->pid == 0)
+		{
+			ft_est(rules->philos[i]);
+			exit(0);
+		}
+*/
 
 void	*ft_eat_checker(void *arg)
 {
@@ -79,6 +74,11 @@ void	p_exit(t_rules *rules, t_philo **philos)
 {
 	int	i;
 
+	i = -1;
+	while (++i < rules->philo_count)
+	{
+		kill(rules->philos[i]->pid, SIGKILL);
+	}
 	sem_close(rules->meal_check);
 	sem_close(rules->writing);
 	sem_close(rules->forks);
@@ -95,4 +95,39 @@ void	p_exit(t_rules *rules, t_philo **philos)
 	free(rules->philos);
 	free(rules->is_ate);
 	free(rules);
+}
+
+int	get_len(int i)
+{
+	int	rt;
+
+	rt = 0;
+	while (i > 0)
+	{
+		i = i / 10;
+		rt++;
+	}
+	return (rt);
+}
+
+char	*get_name(int i)
+{
+	char	*rt;
+	int		j;
+	int		len;
+
+	len = get_len(i);
+	j = 0;
+	rt = malloc((sizeof(char) * 3) + len + 1);
+	rt[0] = 'i';
+	rt[1] = '_';
+	rt[2] = 'a';
+	while (j < len)
+	{
+		rt[3 + j] = 'a' + (i % 10);
+		i /= 10;
+		j++;
+	}
+	rt[3 + j] = '\0';
+	return (rt);
 }

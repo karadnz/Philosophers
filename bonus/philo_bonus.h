@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:50:52 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/06 16:11:03 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/08 02:44:04 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_rules
 	int					time_sleep;
 	int					max_eat;
 
-	//int					is_dead;
 	int					all_ate;
 	long long			first_timestamp;
 	sem_t				*meal_check;
@@ -58,6 +57,8 @@ void		init_philos(t_rules *rules);
 int			init_mutex(t_rules *rules);
 int			is_valid_num(char *str);
 int			is_args_valid(int argc, char **argv);
+int			get_len(int i);
+char		*get_name(int i);
 //****MAIN******//
 void		p_exit(t_rules *rules, t_philo **philos);
 void		*ft_eat_checker(void *arg);

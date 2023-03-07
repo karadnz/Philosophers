@@ -31,5 +31,7 @@ To use mutexes to solve the Dining Philosopher Problem, we can represent each fo
 
 ## Useful stuff
 
-You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
+The Youtube playlist that i created for the project:
+
+
 

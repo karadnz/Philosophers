@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:50 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/06 20:15:10 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/08 02:46:44 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ int	is_valid_num(char *str)
 
 void	init_rules(int argc, char **argv, t_rules *rules)
 {
+	if (!(is_args_valid(argc, argv)))
+	{
+		write(2, "Error at arguments!", 19);
+		free(rules);
+		exit(2);
+	}
 	rules->philo_count = ft_atoi(argv[1]);
 	rules->time_death = ft_atoi(argv[2]);
 	rules->time_eat = ft_atoi(argv[3]);
@@ -79,45 +85,10 @@ void	init_philos(t_rules *rules)
 	}
 }
 
-int	get_len(int i)
-{
-	int	rt;
-
-	rt = 0;
-	while (i > 0)
-	{
-		i = i / 10;
-		rt++;
-	}
-	return (rt);
-}
-
-char	*get_name(int i)
-{
-	char	*rt;
-	int		j;
-	int		len;
-
-	len = get_len(i);
-	j = 0;
-	rt = malloc((sizeof(char) * 3) + len + 1);
-	rt[0] = 'i';
-	rt[1] = '_';
-	rt[2] = 'a';
-	while (j < len)
-	{
-		rt[3 + j] = 'a' + (i % 10);
-		i /= 10;
-		j++;
-	}
-	rt[3 + j] = '\0';
-	return (rt);
-}
-
-	
 int	init_mutex(t_rules *rules)
 {
-	int	i;
+	int		i;
+	char	*str;
 
 	sem_unlink("meal_check");
 	sem_unlink("writing");
@@ -127,9 +98,9 @@ int	init_mutex(t_rules *rules)
 	i = 0;
 	while (i < rules->philo_count)
 	{
-		char *str = get_name(i + 1);
+		str = get_name(i + 1);
 		sem_unlink(str);
-		rules->is_ate[i] = rules->stop = sem_open(str, O_CREAT, 0600, 1);
+		rules->is_ate[i] = sem_open(str, O_CREAT, 0600, 1);
 		free(str);
 		i++;
 	}

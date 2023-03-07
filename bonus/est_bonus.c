@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:39 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/06 20:14:05 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/08 02:33:42 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	*ft_est(void *phil)
 		p_eat(philo);
 		if (philo->rules->max_eat != -1
 			&& philo->eat_count >= philo->rules->max_eat)
-			{
-				sem_post(philo->rules->is_ate[philo->id]);
-				break ;
-			}
+		{
+			sem_post(philo->rules->is_ate[philo->id]);
+			break ;
+		}
 		p_print(philo->rules, philo->id, "is sleeping");
 		u_sleep(philo->rules->time_sleep, philo->rules);
 		p_print(philo->rules, philo->id, "is thinking");
