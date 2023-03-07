@@ -27,7 +27,7 @@ To use mutexes to solve the Dining Philosopher Problem, we can represent each fo
 
 ## Solution with processes and semaphores
 
-When it comes to bonus part things gets a little tricky. In the bonus part each philosopher is a seperate procesess and all forks are at the table for everyone to grab. Forks are reperesented as a semaphore with a count of number of the forks. To solve it i created
+
 
 ## Useful stuff
 
