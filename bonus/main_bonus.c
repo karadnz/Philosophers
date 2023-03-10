@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:16 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/10 14:08:52 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/10 17:50:18 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	main(int argc, char **argv)
 			ft_est(rules->philos[i]);
 			exit(0);
 		}
-		usleep(10);
 	}
 	pthread_create(&checker, NULL, ft_eat_checker, rules);
 	pthread_detach(checker);

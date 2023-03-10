@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:59:20 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/25 14:24:41 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:11:54 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	u_sleep(long long time, t_rules *rules)
 	{
 		if (time_diff(i, timestamp()) >= time)
 			break ;
-		usleep(50);
+		usleep(500);
 	}
 }
 

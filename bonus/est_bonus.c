@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:39 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/10 14:10:05 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/10 16:45:21 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*ft_bonus_death(void *phil)
 			break ;
 		}
 		sem_post(philo->rules->meal_check);
-		usleep(100);
+		usleep(500);
 	}
 	return (NULL);
 }

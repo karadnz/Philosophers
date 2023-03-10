@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:52:10 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/08 02:42:27 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/10 17:49:49 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,16 @@ void	u_sleep(long long time, t_rules *rules)
 	{
 		if (time_diff(i, timestamp()) >= time)
 			break ;
-		usleep(50);
+		usleep(500);
 	}
 }
 
 void	p_print(t_rules *rules, int id, char *msg)
 {
 	sem_wait((rules->writing));
-	if (1)
-	{
-		printf("%lli ", timestamp() - rules->first_timestamp);
-		printf("%i ", id + 1);
-		printf("%s\n", msg);
-	}
+	printf("%lli ", timestamp() - rules->first_timestamp);
+	printf("%i ", id + 1);
+	printf("%s\n", msg);
 	sem_post((rules->writing));
 	return ;
 }

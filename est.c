@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:43:01 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/02/25 14:24:19 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:12:21 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	check_is_dead(t_rules *rules, t_philo **philos)
 					pthread_mutex_unlock(&(rules->forks[j]));
 			}
 			pthread_mutex_unlock(&(rules->meal_check));
-			usleep(100);
+			usleep(500);
 			i++;
 		}
 		if (rules->is_dead)
