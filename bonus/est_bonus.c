@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:39 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/08 02:33:42 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:10:05 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	*ft_bonus_death(void *phil)
 {
 	t_philo	*philo;
-	int		j;
 
 	philo = (t_philo *)phil;
 	while (1)

@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:16 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/08 02:46:49 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:08:52 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,9 @@ int	main(int argc, char **argv)
 	pthread_create(&checker, NULL, ft_eat_checker, rules);
 	pthread_detach(checker);
 	sem_wait(rules->stop);
-	p_exit(rules, rules->philos);
+	p_exit(rules);
 	return (0);
 }
-/*
-if (rules->philos[i]->pid == 0)
-		{
-			ft_est(rules->philos[i]);
-			exit(0);
-		}
-*/
 
 void	*ft_eat_checker(void *arg)
 {
@@ -68,9 +61,10 @@ void	*ft_eat_checker(void *arg)
 		i++;
 	}
 	sem_post(rules->stop);
+	return (NULL);
 }
 
-void	p_exit(t_rules *rules, t_philo **philos)
+void	p_exit(t_rules *rules)
 {
 	int	i;
 

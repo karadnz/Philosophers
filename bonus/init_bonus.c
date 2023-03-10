@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:51:50 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/08 02:46:44 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:09:28 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	init_philos(t_rules *rules)
 	}
 }
 
-int	init_mutex(t_rules *rules)
+void	init_mutex(t_rules *rules)
 {
 	int		i;
 	char	*str;

@@ -14,7 +14,7 @@ BNAME	= philo_bonus
 
 GCC	= gcc
 
-FLAGS =  
+FLAGS =  -Wall -Wextra -Werror
 
 INCLUDE	= -lpthread
 

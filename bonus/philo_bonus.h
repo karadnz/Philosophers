@@ -6,7 +6,7 @@
 /*   By: mkaraden <mkaraden@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:50:52 by mkaraden          #+#    #+#             */
-/*   Updated: 2023/03/08 02:44:04 by mkaraden         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:09:41 by mkaraden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ typedef struct s_rules
 //****INIT*******//
 void		init_rules(int argc, char **argv, t_rules *rules);
 void		init_philos(t_rules *rules);
-int			init_mutex(t_rules *rules);
+void		init_mutex(t_rules *rules);
 int			is_valid_num(char *str);
 int			is_args_valid(int argc, char **argv);
 int			get_len(int i);
 char		*get_name(int i);
 //****MAIN******//
-void		p_exit(t_rules *rules, t_philo **philos);
+void		p_exit(t_rules *rules);
 void		*ft_eat_checker(void *arg);
 //****UTILS****//
 int			ft_atoi(const char *str);
