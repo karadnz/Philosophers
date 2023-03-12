@@ -14,11 +14,8 @@ INCLUDE	= -lpthread
 HEADER	= philo_bonus.h
 
 
-
-
 all:	$(NAME)
 
-.PHONY:	clean fclean re
 
 $(NAME): $(OBJS)
 	$(GCC) $(INCLUDE) $(FLAGS) -o $(NAME) $(OBJS)
@@ -34,3 +31,5 @@ re: fclean all
 
 %.o: %.c $(HEADER)
 	$(GCC) $(FLAGS) -c $<  -o $(<:.c=.o)
+
+.PHONY:	clean fclean re
